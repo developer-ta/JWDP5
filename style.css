@@ -80,6 +80,16 @@ a {
     width: 125px;
 }
 
+img {
+    height: 100%;
+    width: 100%;
+}
+
+.image_product {
+    width: 45%;
+    height: 150px;
+}
+
 .page {
     color: gold;
     background-color: black;
@@ -120,22 +130,26 @@ nav {
 
 table {
     width: 95%;
+    padding-top: 8px;
+    /* border-radius: 16px; */
+    overflow: hidden;
 }
 
 thead {
-    color: blue;
-    text-align: left;
+    color: rgb(0 0 0 / 65%);
+    text-align: center;
+    /* margin-top: 9px; */
+    border-radius: 20px;
+    overflow: hidden;
 }
 
-table,
 th,
 td {
     border-collapse: collapse;
     border: 1px solid;
 }
 
-th,
-td {
+th {
     height: 50px;
 }
 

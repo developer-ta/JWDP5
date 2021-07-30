@@ -1,4 +1,4 @@
-const camerasata = document.querySelector('tbody').innerHTML;
+const camerasata = document.querySelector('tbody');
 const urlTeddies = 'http://localhost:3000/api/teddies';
 // alert(urlTeddies);
 const urlCameras = "http://localhost:3000/api/cameras";
@@ -37,11 +37,12 @@ function afichage_data_teddies(data_teddies) {
     data_teddies.forEach(function(article_teddies) {
 
         console.log(article_teddies.imageUrl);
-        image_data_teddies += `<tr><td><img src="${article_teddies.imageUrl}"></td></tr>}`;
+        image_data_teddies += `<tr><td class="image_product"><img src="${article_teddies.imageUrl}"></td></tr>`;
     });
     DataPlace_teddies.innerHTML = image_data_teddies;
 
 }
+
 
 
 
@@ -79,7 +80,7 @@ function afichage_data_teddies(data_teddies) {
 
 
 
-function getDataProducts(url) {}
+
 
 
 
