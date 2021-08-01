@@ -1,47 +1,62 @@
-const camerasata = document.querySelector('tbody');
+//Déclaré  des variables pour contrôler l'affichage de trois produits différents
+
 const urlTeddies = 'http://localhost:3000/api/teddies';
-// alert(urlTeddies);
 const urlCameras = "http://localhost:3000/api/cameras";
+const urlFurnitures = "http://localhost:3000/api/furniture";
+const DataPlace_products = document.querySelector('tbody');
+let button_teddies;
+let button_cameras;
+let button_furnitures;
+button_Touts_articles = document.querySelector('.Touts_articles').addEventListener('click', get_json(urlTeddies));
+button_teddies = document.querySelector('.btn_teddies').addEventListener('click', get_json(urlTeddies));
+button_cameras = document.querySelector('.btn_cameras').addEventListener('click', get_json(urlCameras));
+button_furnitures = document.querySelector('.btn_teddies').addEventListener('click', get_json(urlFurnitures));
+
+//Envoyer le requête pour récupérer les réponses de serveur
+
+async function get_json(url) {
+
+    let jsonResponce = await fetch(url);
+    let data = await jsonResponce.json();
+
+    //Faire sortir data des produits par la voit Qui relit entre argument de fonction et paramètres de fonction extérieur 
+    afichage_data(data);
 
 
+}
+get_json();
+
+//Traiter et analyser les données obtenues par le serveur puis placer sur la pelle page HTM
+function afichage_data(data_products) {
+    console.log('34@@', data_products);
+
+    let image_data = '';
+    data_products.forEach(function(article_products) {
+
+        console.log('39@@', article_products.imageUrl);
+        console.log('40@@', article_products);
+
+        image_data +=
+            `<tr>
+        <td class="image_product">
+        <img src="${article_products.imageUrl}"></td>
+        </tr>`;
+    });
+    DataPlace_products.innerHTML = image_data;
+
+}
 
 
-
-let DataPlace_teddies;
-DataPlace_teddies = document.querySelector('tbody');
 // let DataPlace2 = '<tr class="name"><td id="name"></td></tr><br>';
 // DataPlace1.innerHTML = DataPlace2;
 // console.log(urlTeddies);
-let button_teddies = document.querySelector('.btn_teddies').addEventListener('click', get_json_teddies);
 
 
 
-async function get_json_teddies() {
-
-    let jsonResponce = await fetch(urlTeddies);
-    let data = await jsonResponce.json();
-    //console.log(data);
 
 
-    afichage_data_teddies(data);
 
 
-}
-get_json_teddies();
-
-
-function afichage_data_teddies(data_teddies) {
-    console.log(data_teddies);
-
-    let image_data_teddies = '';
-    data_teddies.forEach(function(article_teddies) {
-
-        console.log(article_teddies.imageUrl);
-        image_data_teddies += `<tr><td class="image_product"><img src="${article_teddies.imageUrl}"></td></tr>`;
-    });
-    DataPlace_teddies.innerHTML = image_data_teddies;
-
-}
 
 
 
@@ -57,7 +72,7 @@ function afichage_data_teddies(data_teddies) {
 
 
 // alert(urlCameras);
-// const urlTeddies = 'http://localhost:3000/api/teddies';
+// const ur = 'http://localhost:3000/api/teddies';
 
 
 
