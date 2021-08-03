@@ -1,8 +1,8 @@
 //Déclaré  des variables pour contrôler l'affichage de trois produits différents
 
 const urlTeddies = 'http://localhost:3000/api/teddies';
-const urlCameras = "http://localhost:3000/api/cameras";
-const urlFurnitures = "http://localhost:3000/api/furniture";
+const urlCameras = 'http://localhost:3000/api/cameras';
+const urlFurnitures = 'http://localhost:3000/ap/furniture';
 const DataPlace_products = document.querySelector('tbody');
 let button_teddies;
 let button_cameras;
@@ -15,16 +15,19 @@ button_furnitures = document.querySelector('.btn_teddies').addEventListener('cli
 //Envoyer le requête pour récupérer les réponses de serveur
 
 async function get_json(url) {
-
+    url.stopPropagation();
     let jsonResponce = await fetch(url);
-    let data = await jsonResponce.json();
-
-    //Faire sortir data des produits par la voit Qui relit entre argument de fonction et paramètres de fonction extérieur 
-    afichage_data(data);
+    if (jsonResponce.ok) {
+        let data = await jsonResponce.json();
+        console.log(data);
+        afichage_data(data);
+    } else {
+        alert('Error');
+    }
 
 
 }
-get_json();
+
 
 //Traiter et analyser les données obtenues par le serveur puis placer sur la pelle page HTM
 function afichage_data(data_products) {
