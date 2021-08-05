@@ -38,7 +38,6 @@ li {
 
 .product-list {
   background-color: rgb(245 245 245 / 84%);
-
   width: 100%;
   border-radius: 20px;
   margin-left: 0%;
@@ -56,6 +55,7 @@ button.btn {
   margin: 15px;
   border-radius: 6px;
   color: white;
+  font-weight: bolder;
 }
 
 .btn:hover {
@@ -73,7 +73,7 @@ button.btn {
   width: 100px;
 }
 
-a {
+.link_products {
   text-decoration: none;
   flex-basis: 125px;
   width: 125px;
@@ -86,12 +86,16 @@ img {
 }
 
 .image_product {
-  width: 32.333%;
-
+  width: 99%;
   padding: 3px;
   box-shadow: 0px 3px 5px 1px white;
   border-radius: 15px;
   overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
 }
 
 .page {
@@ -168,4 +172,23 @@ th,
 td {
   border-collapse: collapse;
   border: 1px solid;
+}
+
+.product_description {
+  width: 33%;
+  padding: 1%;
+  align-self: baseline;
+  flex-basis: 360px;
+}
+a.image-size {
+  /* width: 76%; */
+  flex-basis: 375px;
+}
+.selection {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  flex-basis: 370px;
 }

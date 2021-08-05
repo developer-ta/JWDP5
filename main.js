@@ -44,13 +44,13 @@ function afichage_teddies(data) {
         let description = item.description;
         let image = item.imageUrl;
 
-        affisher = '<button class="btn" type="submit">add-panier</button><button class="btn" type="submit">favorite</button>'
+        affisher = '<div class="selection"><button class="btn" type="submit">add-panier</button><button class="btn" type="submit">favorite</button></div>'
 
 
-        images = `<a href="${image}" target="_black"><img src="${image}"></a>`
+        images = `<a href="${image}" target="_black" class="image-size"><img src="${image}"></a>`
 
-        p = `<div><strong>description:</strong>${description}<br>colors: <br> price:</div>`
-        item_container += `<div>${images}${p}${affisher}</div>`;
+        p = `<div class="product_description"><strong>description:</strong>${description}<br><hr><strong>colors:</strong> ${item.colors}<br> <hr><strong>price:</strong>${item.price}€<hr></div>`
+        item_container += `<div class="image_product">${images}${p}${affisher}</div>`;
 
 
 
