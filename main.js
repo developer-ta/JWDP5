@@ -1,13 +1,19 @@
+let container = document.createElement('div');
+container.className = "container_item";
+document.querySelector('.affichang_products').appendChild(container);
 let teddies__data = [];
 const images_products = document.createElement('div');
 images_products.className = "image_product";
-document.querySelector('.affichang_products').appendChild(images_products);
+document.querySelector('.container_item').appendChild(images_products);
 const description_products = document.createElement('div');
 description_products.className = "description";
-document.querySelector('.affichang_products').appendChild(description_products);
+document.querySelector('.container_item').appendChild(description_products);
 const btn_select = document.createElement('div');
 btn_select.className = "btn_select";
-document.querySelector('.affichang_products').appendChild(btn_select);
+document.querySelector('.container_item').appendChild(btn_select);
+
+
+
 
 async function get_json() {
 
@@ -30,6 +36,7 @@ function afichage_teddies(data) {
     let images = '';
     let p = '';
     let affisher = '';
+
 
 
     data.forEach(function (item) {
