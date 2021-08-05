@@ -34,7 +34,7 @@ function afichage_data(data_products) {
     console.log('34@@', data_products);
 
     let image_data = '';
-    data_products.forEach(function(article_products) {
+    data_products.forEach(function (article_products) {
 
         console.log('39@@', article_products.imageUrl);
         console.log('40@@', article_products);
@@ -44,6 +44,7 @@ function afichage_data(data_products) {
         <td class="image_product">
         <img src="${article_products.imageUrl}"></td>
         </tr>`;
+
     });
     DataPlace_products.innerHTML = image_data;
 

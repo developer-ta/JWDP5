@@ -1,16 +1,15 @@
 let allUrl = ['http://localhost:3000/api/teddies',
     'http: //localhost:3000/api/cameras',
     'http://localhost:3000/api/furniture'
-];
-const allTeddies__data = [];
-console.log('const allTeddies__data[]: ', allTeddies__data);
-const allCameras__data = [];
-console.log('const allCameras__data[]: ', allCameras__data);
-const allFurniture__data = [];
-console.log('const allFurniture__data[]: ', allFurniture__data);
+]
+let allTeddies__data = [];
+console.log('let allTeddies__data[]: ', allTeddies__data);
+let allCameras__data = [];
+console.log('let allCameras__data[]: ', allCameras__data);
+let allFurniture__data = [];
+console.log('let allFurniture__data[]: ', allFurniture__data);
 let url = [];
-const DataPlace_products = document.querySelector('tbody');
-
+let DataPlace_products = document.querySelector('tbody');
 
 
 
@@ -24,17 +23,18 @@ async function get_json_teddies() {
 
         let teddies__data = data;
 
-        teddies__data.forEach(function (teddies__data) {
+        // afichage_data(teddies__data);
 
-            allTeddies__data.push(teddies__data);
+        allTeddies__data.push(teddies__data);
 
-        });
+
 
     } else {
         alert('Error');
     };
 }
 get_json_teddies();
+//))))))))))))))))))))))))))))))))))))
 
 async function get_json_cameras() {
 
@@ -45,17 +45,19 @@ async function get_json_cameras() {
 
         let cameras__data = data;
 
-        cameras__data.forEach(function (cameras__data) {
+        cameras(cameras__data);
 
-            allCameras__data.push(cameras__data);
+        allCameras__data.push(cameras__data);
 
-        });
+
 
     } else {
         alert('Error');
     };
 }
 get_json_cameras();
+
+//)))))))))))))))))))))))
 
 async function get_json_furniture() {
 
@@ -65,15 +67,72 @@ async function get_json_furniture() {
         let data = await jsonResponce.json();
 
         let furniture__data = data;
-
-        furniture__data.forEach(function (furniture__data) {
-
-            allFurniture__data.push(furniture__data);
-
-        });
+        console.log(furniture__data);
+        afichage_data_furniture(furniture__data);
+        allFurniture__data.push(furniture__data);
 
     } else {
         alert('Error');
     };
 }
 get_json_furniture();
+
+//Afficher les produits dans la page d'accueil et lister ))))))
+
+function afichage_data_furniture(furniture) {
+    console.log('furniture: ', furniture);
+
+    let image_data = '';
+    // let color = '';
+
+
+    furniture.forEach(function (article_products) {
+
+
+
+
+
+        image_data +=
+            `<tr>
+    <td class="image_product">
+        <img src="${article_products.imageUrl}">
+        
+        <div class="data"><h3>${article_products.name}</h3>
+        <p> prix: ${article_products.price} €</p></div>
+
+    </td>
+      <td class="image_product_camera"></td>
+      <td class="image_product">
+        <img src="${article_products.imageUrl}">
+        
+        <div class="data"><h3>${article_products.name}</h3>
+        <p> prix: ${article_products.price} €</p></div>
+
+    </td>
+</tr>`;
+
+    });
+
+    DataPlace_products.innerHTML = image_data;
+
+
+
+
+
+
+}
+//Afficher les produits dans la page d'accueil et lister ))))))
+
+function cameras(allCameras__data) {
+    let image = '';
+    allCameras__data.forEach(camera => {
+
+        // image += `<img src="${camera.imageUrl}"><div class="data"><h3>${camera.name}</h3><p>prix: ${camera.price} €</p></div>`;
+        image += `<img src="${camera.imageUrl}">`;
+
+    });
+    DataPlace_products.innerHTML = image;
+    console.log('image: ', image);
+
+
+}
