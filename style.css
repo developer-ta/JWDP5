@@ -57,7 +57,9 @@ button.btn {
   color: white;
   font-weight: bolder;
 }
-
+hr {
+  background-color: rgb(206, 210, 214);
+}
 .btn:hover {
   background: linear-gradient(181deg, rgb(17, 190, 248), #0000);
   box-shadow: 0px 0px 4px 1px lightblue;
