@@ -1,8 +1,12 @@
 //Déclaré  des variables pour contrôler l'affichage de trois produits différents
+const url = new URLSearchParams(window.location.search).get("category");
+
+console.log('url@@@@@@@@: ', url);
 
 const urlTeddies = 'http://localhost:3000/api/teddies';
+
 const urlCameras = 'http://localhost:3000/api/cameras';
-const urlFurnitures = 'http://localhost:3000/ap/furniture';
+const urlFurnitures = 'http://localhost:3000/api/furniture';
 const DataPlace_products = document.querySelector('tbody');
 let button_teddies;
 let button_cameras;
