@@ -32,32 +32,32 @@ function affichage_teddies(data) {
     let p = '';
     let affisher = '';
     let item_container = '';
-    for (let item of data) {
-
+    data.forEach(function (item) {
+        // console.log('item: ', item);
         let description = item.description;
         let image = item.imageUrl;
 
-        affisher = '<div class="selection"> <button class = "btn addPanier"> add-panier </button> <button class = "btn add-favorite"> favorite </button></div>';
+        affisher = '<div class="selection"><button class="btn add_panier" type="submit">add-panier</button><button class="btn" type="submit">favorite</button></div>'
 
 
-
-        images = `<a href="${image}" target="_black" 
-        class="image-size"><img src="${image}"></a>`;
+        images = `<a href="${image}" target="_black" class="image-size"><img src="${image}"></a>`
 
         p = `<div class="product_description"><strong>description:</strong>${description}<br><hr><strong>colors:</strong> ${item.colors}<br> <hr><strong>price:</strong>${item.price}€<hr></div>`
         item_container += `<div class="image_product">${images}${p}${affisher}</div>`;
 
-    };
-
+    });
+    // console.log('item_container: ', item_container);
 
     document.querySelector('.container_item').innerHTML = item_container;
-    document.querySelectorAll(".addPanier");
-    console.log('querySelectorAll(".addPanier"): ', querySelectorAll(".addPanier"));
+    console.log(button = document.querySelectorAll('button.btn.add_panier'));
+
+
+
+    // document.querySelector('.image_product').innerHTML = images;
+    // document.querySelector('.description').innerHTML = p;
+    // document.querySelector('.btn_select').innerHTML = affisher;
 
 }
-
-
-
 
 
 //C) add-Panier
