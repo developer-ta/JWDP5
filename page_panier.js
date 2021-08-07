@@ -1,7 +1,10 @@
 let container = document.createElement('div');
 container.className = "container_item";
 document.querySelector('.affichang_products').appendChild(container);
-let teddies__data = [];
+let add_panier_data = {};
+console.log('add_panier_data = {}: ', add_panier_data = {});
+
+console.log('length: ', add_panier_data.product_data);
 
 
 
@@ -11,9 +14,12 @@ async function get_json() {
     let jsonResponce = await fetch('http://localhost:3000/api/teddies');
     if (jsonResponce.ok) {
         let data = await jsonResponce.json();
-
-
         affichage_teddies(data);
+        add_panier(data);
+        add_panier_data.product_data = data;
+
+
+
     } else {
         alert('Error');
     }
@@ -49,7 +55,7 @@ function affichage_teddies(data) {
     // console.log('item_container: ', item_container);
 
     document.querySelector('.container_item').innerHTML = item_container;
-    console.log(button = document.querySelectorAll('button.btn.add_panier'));
+    add_panier_data.button = document.querySelectorAll('button.btn.add_panier');
 
 
 
@@ -62,6 +68,24 @@ function affichage_teddies(data) {
 
 //C) add-Panier
 //C-0)get button click:-1 f() data; -2 f() recevoir la donné;-3 f()
+function add_panier() {
+
+    //add click listener -> button click
+    for (const buttons of add_panier_data.button) {
+
+        buttons.addEventListener("click", () => {
+            console.log(buttons);
+
+            // Event.stopPropagation();
+
+
+
+
+        });
+    }
+}
+
+
 
 
 
