@@ -4,7 +4,7 @@ document.querySelector('.affichang_products').appendChild(container);
 let add_panier_data = {};
 console.log('add_panier_data = {}: ', add_panier_data = {});
 
-console.log('length: ', add_panier_data.product_data);
+
 
 
 
@@ -71,10 +71,13 @@ function affichage_teddies(data) {
 function add_panier() {
 
     //add click listener -> button click
-    for (const buttons of add_panier_data.button) {
 
-        buttons.addEventListener("click", () => {
-            console.log(buttons);
+    for (let j = 0; j < add_panier_data.button.length; j++) {
+
+        add_panier_data.button[j].addEventListener("click", (e) => {
+            e.stopPropagation();
+            console.log(add_panier_data.product_data[j]);
+
 
             // Event.stopPropagation();
 
@@ -84,6 +87,7 @@ function add_panier() {
         });
     }
 }
+
 
 
 
