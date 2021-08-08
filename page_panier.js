@@ -76,7 +76,12 @@ function add_panier() {
 
         add_panier_data.button[j].addEventListener("click", (e) => {
             e.stopPropagation();
+            let key_Of_Prudact = add_panier_data.product_data[j].name;
+            const value_objet = JSON.stringify(add_panier_data.product_data[j]);
+
             console.log(add_panier_data.product_data[j]);
+            localStorage.setItem(key_Of_Prudact,
+                value_objet);
 
 
             // Event.stopPropagation();
