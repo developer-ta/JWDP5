@@ -16,6 +16,7 @@ async function get_json() {
         let data = await jsonResponce.json();
         affichage_teddies(data);
         add_panier(data);
+        //envoyer nouvell Propriété ->objet add_panier_data
         add_panier_data.product_data = data;
 
 
@@ -69,29 +70,47 @@ function affichage_teddies(data) {
 //C) add-Panier
 //C-0)get button click:-1 f() data; -2 f() recevoir la donné;-3 f()
 function add_panier() {
-
     //add click listener -> button click
-
     for (let j = 0; j < add_panier_data.button.length; j++) {
 
         add_panier_data.button[j].addEventListener("click", (e) => {
             e.stopPropagation();
-            let key_Of_Prudact = add_panier_data.product_data[j].name;
+            //set->localStorage pour chaque button
+            const id_Product = add_panier_data.product_data[j]._id;
+            let key_Of_Product = add_panier_data.product_data[j].name;
             const value_objet = JSON.stringify(add_panier_data.product_data[j]);
-
             console.log(add_panier_data.product_data[j]);
-            localStorage.setItem(key_Of_Prudact,
-                value_objet);
-
-
-            // Event.stopPropagation();
-
-
+            localStorage.setItem(key_Of_Product, value_objet);
+            // set counter ->item panier
+            item_counter(id_Product);
 
 
         });
     }
 }
+
+
+let numbers_item = 0;
+let numbers_of_selected = 0;
+
+function item_counter(id_Product) {
+
+
+    let selection_number = document.querySelector('.item_counter');
+
+    let get_item_counter = localStorage.getItem(id_Product);
+    console.log('get_item_counter: ', get_item_counter);
+
+
+
+    ++numbers_item;
+
+
+    localStorage.setItem('selection_number', numbers_item);
+    selection_number.textContent = numbers_item;
+}
+
+console.log('@@@@@@@@@@: ', numbers_item);
 
 
 

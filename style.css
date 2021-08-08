@@ -194,3 +194,14 @@ a.image-size {
   justify-content: center;
   flex-basis: 370px;
 }
+.item_counter {
+    border-radius: 100%;
+    width: 15px;
+    height: 15px;
+    padding: 2px 4px 4px 4px;
+    background-color: rgba(12, 83, 236, 0.801);
+    text-align: center;
+    margin-left: 10px;
+    color: #f5f5f5;
+    font-weight: 900;
+}
