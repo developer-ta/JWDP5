@@ -81,9 +81,22 @@ function affichage_teddies(data) {
 //C) add-Panier
 //C-0)get button click:-1 f() data; -2 f() recevoir la donné;-3 f()
 function add_panier() {
+    let quantity = '';
     //add click listener -> button click
     for (let j = 0; j < add_panier_data.button.length; j++) {
 
+        add_panier_data.quantity[j].addEventListener('change', (e) => {
+
+            //console.log('add_panier_data.quantity: ', add_panier_data.quantity[j]);
+
+            quantity = JSON.stringify(e.target.value);
+
+            console.log('quantity: ', quantity);
+
+            //  const id_Product = add_panier_data.product_data[j]._id;
+
+        });
+        console.log('quantity: ', quantity);
         add_panier_data.button[j].addEventListener("click", (e) => {
             e.stopPropagation();
             //set->localStorage pour chaque button
@@ -95,19 +108,37 @@ function add_panier() {
             localStorage.setItem(key_Of_Product, value_objet);
             // set counter ->item panier
             item_counter();
-            //get_quantity(id_Product);
-        });
-
-        add_panier_data.quantity[j].addEventListener('change', (e) => {
-            //console.log('add_panier_data.quantity: ', add_panier_data.quantity[j]);
-
-            let quantity = e.target.value;
+            add_panier_data.get_quantity = id_Product;
+            localStorage.setItem(id_Product, quantity);
             console.log('quantity: ', quantity);
-
         });
+
+
     }
 }
 
+function get_quantity() {
+    for (let j = 0; j < add_panier_data.button.length; j++) {
+        add_panier_data.quantity[j].addEventListener('change', (e) => {
+            console.log('add_panier_data.quantity: ', add_panier_data.quantity[j]);
+
+            let quantity = JSON.stringify(e.target.value);
+
+            console.log('quantity: ', quantity);
+
+            const id_Product = add_panier_data.product_data[j]._id;
+
+
+            localStorage.setItem(id_Product, quantity);
+
+
+
+
+        });
+    }
+
+
+}
 
 
 
@@ -131,11 +162,11 @@ function item_counter() {
 }
 
 
-// get_quantity();
+//    localStorage.setItem(key_Of_Product, value_objet);;
 
 
 
-// function get_quantity(id_Product) {
+
 //     //add click listener -> quantity charge
 //     // console.log('add_panier_data.quantity: ', add_panier_data.quantity);
 
