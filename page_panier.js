@@ -2,7 +2,10 @@ let container = document.createElement('div');
 container.className = "container_item";
 document.querySelector('.affichang_products').appendChild(container);
 let add_panier_data = {};
-console.log('add_panier_data = {}: ', add_panier_data = {});
+console.log('add_panier_data = {}: ', add_panier_data);
+
+
+
 
 
 
@@ -16,6 +19,7 @@ async function get_json() {
         let data = await jsonResponce.json();
         affichage_teddies(data);
         add_panier(data);
+        keep_products_numbers();
         //envoyer nouvell Propriété ->objet add_panier_data
         add_panier_data.product_data = data;
 
@@ -44,12 +48,12 @@ function affichage_teddies(data) {
         let description = item.description;
         let image = item.imageUrl;
 
-        affisher = '<div class="selection"><button class="btn add_panier" type="submit">add-panier</button><button class="btn" type="submit">favorite</button></div>'
+        affisher = '<div class="selection"><button class="btn add_panier" type="submit">add-panier</button><input id="input-number" type="number" placeholder="0"></input></div>';
 
 
-        images = `<a href="${image}" target="_black" class="image-size"><img src="${image}"></a>`
+        images = `<a href="${image}" target="_black" class="image-size"><img src="${image}"></a>`;
 
-        p = `<div class="product_description"><strong>description:</strong>${description}<br><hr><strong>colors:</strong> ${item.colors}<br> <hr><strong>price:</strong>${item.price}€<hr></div>`
+        p = `<div class="product_description"><strong>description:</strong>${description}<br><hr><strong>colors:</strong> ${item.colors}<br> <hr><strong>price:</strong>${item.price*0.01} €<hr></div>`
         item_container += `<div class="image_product">${images}${p}${affisher}</div>`;
 
     });
@@ -57,6 +61,10 @@ function affichage_teddies(data) {
 
     document.querySelector('.container_item').innerHTML = item_container;
     add_panier_data.button = document.querySelectorAll('button.btn.add_panier');
+    add_panier_data.quantity = document.querySelectorAll('#input-number');
+
+
+
 
 
 
@@ -65,6 +73,9 @@ function affichage_teddies(data) {
     // document.querySelector('.btn_select').innerHTML = affisher;
 
 }
+
+
+
 
 
 //C) add-Panier
@@ -80,37 +91,83 @@ function add_panier() {
             let key_Of_Product = add_panier_data.product_data[j].name;
             const value_objet = JSON.stringify(add_panier_data.product_data[j]);
             console.log(add_panier_data.product_data[j]);
+            //set localStorage -> produits choisi
             localStorage.setItem(key_Of_Product, value_objet);
             // set counter ->item panier
-            item_counter(id_Product);
+            item_counter();
+            //get_quantity(id_Product);
+        });
 
+        add_panier_data.quantity[j].addEventListener('change', (e) => {
+            //console.log('add_panier_data.quantity: ', add_panier_data.quantity[j]);
+
+            let quantity = e.target.value;
+            console.log('quantity: ', quantity);
 
         });
     }
 }
 
 
-let numbers_item = 0;
-let numbers_of_selected = 0;
-
-function item_counter(id_Product) {
 
 
-    let selection_number = document.querySelector('.item_counter');
+function keep_products_numbers() {
+    document.querySelector('.item_counter').textContent = parseInt(localStorage.getItem('selection_number'));
 
-    let get_item_counter = localStorage.getItem(id_Product);
-    console.log('get_item_counter: ', get_item_counter);
-
-
-
-    ++numbers_item;
-
-
-    localStorage.setItem('selection_number', numbers_item);
-    selection_number.textContent = numbers_item;
 }
 
-console.log('@@@@@@@@@@: ', numbers_item);
+
+let numbers_item = 0;
+
+function item_counter() {
+
+    // nombre d'articles sélecter dans le panier
+    let selection_number = document.querySelector('.item_counter');
+
+    ++numbers_item;
+    localStorage.setItem('selection_number', numbers_item);
+    selection_number.textContent = parseInt(localStorage.getItem('selection_number'));
+
+}
+
+
+// get_quantity();
+
+
+
+// function get_quantity(id_Product) {
+//     //add click listener -> quantity charge
+//     // console.log('add_panier_data.quantity: ', add_panier_data.quantity);
+
+
+
+//     for (let i = 0; i < 5; i++) {
+//         let x = document.querySelectorAll('#input-number');
+
+
+
+//         x[i].addEventListener('charge', (e) => {
+//             console.log('add_panier_data.quantity: ', x);
+//             // event.stopPropagation();
+//             //set->localStorage pour chaque quantity
+
+
+//             let input = jSON.stringify(e.target.value);
+//             console.log(('###########'), input);
+//             //set localStorage -> quantity choisi
+//             localStorage.setItem(id_Product, input);
+//             // set counter ->item panier
+
+//         });
+//     }
+
+
+// }
+
+
+
+
+
 
 
 
