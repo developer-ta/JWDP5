@@ -48,7 +48,7 @@ function affichage_teddies(data) {
         let description = item.description;
         let image = item.imageUrl;
 
-        affisher = '<div class="selection"><button class="btn add_panier" type="submit">add-panier</button><input id="input-number" type="number" placeholder="0"></input></div>';
+        affisher = '<form><div class="selection"><button class="btn add_panier" type="button">add-panier</button><input id="input-number" type="number" placeholder="0"></input></div></form>';
 
 
         images = `<a href="${image}" target="_black" class="image-size"><img src="${image}"></a>`;
@@ -86,6 +86,7 @@ function add_panier() {
     for (let j = 0; j < add_panier_data.button.length; j++) {
 
         add_panier_data.quantity[j].addEventListener('change', (e) => {
+            e.stopPropagation();
 
             //console.log('add_panier_data.quantity: ', add_panier_data.quantity[j]);
 
@@ -93,12 +94,14 @@ function add_panier() {
 
             console.log('quantity: ', quantity);
 
+
             //  const id_Product = add_panier_data.product_data[j]._id;
 
         });
-        console.log('quantity: ', quantity);
+
         add_panier_data.button[j].addEventListener("click", (e) => {
             e.stopPropagation();
+            localStorage.setItem(add_panier_data.product_data[j]._id, quantity);
             //set->localStorage pour chaque button
             const id_Product = add_panier_data.product_data[j]._id;
             let key_Of_Product = add_panier_data.product_data[j].name;
@@ -109,7 +112,7 @@ function add_panier() {
             // set counter ->item panier
             item_counter();
             add_panier_data.get_quantity = id_Product;
-            localStorage.setItem(id_Product, quantity);
+
             console.log('quantity: ', quantity);
         });
 
@@ -117,28 +120,28 @@ function add_panier() {
     }
 }
 
-function get_quantity() {
-    for (let j = 0; j < add_panier_data.button.length; j++) {
-        add_panier_data.quantity[j].addEventListener('change', (e) => {
-            console.log('add_panier_data.quantity: ', add_panier_data.quantity[j]);
+// function get_quantity() {
+//     for (let j = 0; j < add_panier_data.button.length; j++) {
+//         add_panier_data.quantity[j].addEventListener('change', (e) => {
+//             console.log('add_panier_data.quantity: ', add_panier_data.quantity[j]);
 
-            let quantity = JSON.stringify(e.target.value);
+//             let quantity = JSON.stringify(e.target.value);
 
-            console.log('quantity: ', quantity);
+//             console.log('quantity: ', quantity);
 
-            const id_Product = add_panier_data.product_data[j]._id;
-
-
-            localStorage.setItem(id_Product, quantity);
+//             const id_Product = add_panier_data.product_data[j]._id;
 
 
+//             localStorage.setItem(id_Product, quantity);
 
 
-        });
-    }
 
 
-}
+//         });
+//     }
+
+
+// }
 
 
 
