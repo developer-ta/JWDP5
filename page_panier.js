@@ -4,13 +4,6 @@ document.querySelector('.affichang_products').appendChild(container);
 let add_panier_data = {};
 console.log('add_panier_data = {}: ', add_panier_data);
 
-
-
-
-
-
-
-
 //A) récupérer data
 async function get_json() {
 
@@ -22,18 +15,11 @@ async function get_json() {
         keep_products_numbers();
         //envoyer nouvell Propriété ->objet add_panier_data
         add_panier_data.product_data = data;
-
-
-
     } else {
         alert('Error');
     }
 
-
 }
-
-
-
 get_json();
 
 //B) affichage data
@@ -44,7 +30,6 @@ function affichage_teddies(data) {
     let affisher = '';
     let item_container = '';
     data.forEach(function (item) {
-        // console.log('item: ', item);
         let description = item.description;
         let image = item.imageUrl;
 
@@ -57,31 +42,15 @@ function affichage_teddies(data) {
         item_container += `<div class="image_product">${images}${p}${affisher}</div>`;
 
     });
-    // console.log('item_container: ', item_container);
-
     document.querySelector('.container_item').innerHTML = item_container;
     add_panier_data.button = document.querySelectorAll('button.btn.add_panier');
     add_panier_data.quantity = document.querySelectorAll('#input-number');
 
-
-
-
-
-
-    // document.querySelector('.image_product').innerHTML = images;
-    // document.querySelector('.description').innerHTML = p;
-    // document.querySelector('.btn_select').innerHTML = affisher;
-
 }
-
-
-
-
 
 //C) add-Panier
 //C-0)get button click:-1 f() data; -2 f() recevoir la donné;-3 f()
 function add_panier() {
-    let quantity = '';
     //add click listener -> button click
     for (let j = 0; j < add_panier_data.button.length; j++) {
 
@@ -98,69 +67,46 @@ function add_panier() {
             //  const id_Product = add_panier_data.product_data[j]._id;
 
         });
-
+        //c-1 set button add-panier
         add_panier_data.button[j].addEventListener("click", (e) => {
             e.stopPropagation();
-            localStorage.setItem(add_panier_data.product_data[j]._id, quantity);
-            //set->localStorage pour chaque button
             const id_Product = add_panier_data.product_data[j]._id;
+            //c-0 set quantity aprés click button 
+            localStorage.setItem(id_Product, quantity);
+            //set->localStorage pour chaque button
             let key_Of_Product = add_panier_data.product_data[j].name;
             const value_objet = JSON.stringify(add_panier_data.product_data[j]);
             console.log(add_panier_data.product_data[j]);
-            //set localStorage -> produits choisi
+            //set localStorage -> produits choisy
             localStorage.setItem(key_Of_Product, value_objet);
             // set counter ->item panier
-            item_counter();
-            add_panier_data.get_quantity = id_Product;
+            localStorage.setItem(key_Of_Product, [quantity, value_objet]);
+            item_counter(quantity);
 
-            console.log('quantity: ', quantity);
+            keep_products_numbers(id_Product);
+
         });
 
 
     }
 }
 
-// function get_quantity() {
-//     for (let j = 0; j < add_panier_data.button.length; j++) {
-//         add_panier_data.quantity[j].addEventListener('change', (e) => {
-//             console.log('add_panier_data.quantity: ', add_panier_data.quantity[j]);
+function keep_products_numbers(id_Product) {
+    document.querySelector('.item_counter').textContent = parseInt(localStorage.getItem(id_Product));
 
-//             let quantity = JSON.stringify(e.target.value);
-
-//             console.log('quantity: ', quantity);
-
-//             const id_Product = add_panier_data.product_data[j]._id;
-
-
-//             localStorage.setItem(id_Product, quantity);
-
-
-
-
-//         });
-//     }
-
-
-// }
-
-
-
-function keep_products_numbers() {
-    document.querySelector('.item_counter').textContent = parseInt(localStorage.getItem('selection_number'));
 
 }
-
-
 let numbers_item = 0;
 
-function item_counter() {
-
+function item_counter(quantity) {
     // nombre d'articles sélecter dans le panier
+
     let selection_number = document.querySelector('.item_counter');
 
     ++numbers_item;
-    localStorage.setItem('selection_number', numbers_item);
-    selection_number.textContent = parseInt(localStorage.getItem('selection_number'));
+    quantity += parseInt(quantity);
+    localStorage.setItem('selection_number', quantity);
+    // selection_number.textContent = parseInt(localStorage.getItem());
 
 }
 
